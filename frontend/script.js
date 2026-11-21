@@ -69,7 +69,7 @@ const SAMPLE_ORDER = {
 let lastSubmittedOrder = null;
 
 /* ---------- Backend integration ---------- */
-const API_URL = "https://YOUR-RENDER-SERVICE-URL.onrender.com/predict";
+const API_URL = "https://deliveryiq-api-3vic.onrender.com/predict";
 
 async function analyzeOrder(orderData) {
   const response = await fetch(API_URL, {
