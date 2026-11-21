@@ -70,6 +70,7 @@ let lastSubmittedOrder = null;
 
 /* ---------- Backend integration ---------- */
 const API_URL = "http://127.0.0.1:8000/predict";
+const API_URL = "https://YOUR-RENDER-SERVICE-URL.onrender.com/predict";
 
 async function analyzeOrder(orderData) {
   const response = await fetch(API_URL, {
