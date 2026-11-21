@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>DeliveryIQ · Olist Late Delivery Risk Prediction</title>
+
+  <meta
+    name="description"
+    content="DeliveryIQ is an end-to-end machine learning project that estimates late-delivery risk using the Olist Brazilian E-Commerce dataset."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <script
+    src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"
+    defer
+  ></script>
+
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<header class="nav" id="top">
+  <div class="container nav__inner">
+
+    <a href="#overview" class="brand" aria-label="DeliveryIQ home">
+      <span class="brand__mark">
+        <i data-lucide="package-check"></i>
+      </span>
+
+      <span class="brand__text">
+        <strong>DeliveryIQ</strong>
+        <small>Logistics Intelligence</small>
+      </span>
+    </a>
+
+    <nav class="nav__links" id="nav-links" aria-label="Primary">
+      <a href="#overview">Overview</a>
+      <a href="#risk-analysis">Risk Analysis</a>
+      <a href="#model-insights">Model Insights</a>
+      <a href="#about">About</a>
+
+      <a href="#risk-analysis" class="btn btn--primary btn--sm nav__cta">
+        Analyze Risk
+      </a>
+    </nav>
+
+    <button
+      class="nav__toggle"
+      id="nav-toggle"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="Toggle menu"
+    >
+      <i data-lucide="menu"></i>
+    </button>
+
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="overview-hero">
+  <div class="container hero__grid">
+
+    <div class="hero__copy">
+      <p class="tag">Machine Learning · Predictive Analytics</p>
+
+      <h1>
+        Predict delivery risk before it becomes a problem.
+      </h1>
+
+      <p class="lead">
+        DeliveryIQ uses machine learning to estimate the likelihood
+        of an order arriving later than its expected delivery date.
+        Turn order and logistics data into a meaningful risk signal
+        for smarter operational planning.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#risk-analysis" class="btn btn--primary btn--lg">
+          Analyze Delivery Risk
+        </a>
+
+        <a href="#model-insights" class="btn btn--ghost btn--lg">
+          Explore the Model
+        </a>
+      </div>
+    </div>
+
+    <!-- Illustrative dashboard preview -->
+
+    <figure class="preview" aria-label="Illustrative delivery risk dashboard">
+      <div class="preview__bar">
+        <span></span>
+        <span></span>
+        <span></span>
+        <em>Delivery risk overview · illustration</em>
+      </div>
+
+      <div class="preview__body">
+
+        <svg
+          class="route"
+          viewBox="0 0 400 120"
+          role="img"
+          aria-label="Illustration of a shipment route"
+        >
+          <path
+            d="M20 90 C 100 20, 180 110, 260 50 S 360 30, 380 30"
+            fill="none"
+            stroke="#4776E6"
+            stroke-width="2"
+            stroke-dasharray="5 6"
+          />
+
+          <circle cx="20" cy="90" r="6" fill="#14B8A6"/>
+          <circle cx="260" cy="50" r="5" fill="#F59E0B"/>
+
+          <circle
+            cx="380"
+            cy="30"
+            r="7"
+            fill="#fff"
+            stroke="#4776E6"
+            stroke-width="3"
+          />
+        </svg>
+
+        <ul class="preview__rows">
+
+          <li>
+            <span>Order A</span>
+            <div class="bar">
+              <i style="width:18%;background:var(--low)"></i>
+            </div>
+            <b class="pill pill--low">Low</b>
+          </li>
+
+          <li>
+            <span>Order B</span>
+            <div class="bar">
+              <i style="width:46%;background:var(--med)"></i>
+            </div>
+            <b class="pill pill--med">Medium</b>
+          </li>
+
+          <li>
+            <span>Order C</span>
+            <div class="bar">
+              <i style="width:78%;background:var(--high)"></i>
+            </div>
+            <b class="pill pill--high">High</b>
+          </li>
+
+        </ul>
+      </div>
+    </figure>
+
+  </div>
+</section>
+
+
+<!-- OVERVIEW -->
+
+<section class="section" id="overview">
+  <div class="container">
+
+    <div class="section__head">
+      <h2>Project Overview</h2>
+
+      <p>
+        DeliveryIQ is an end-to-end machine learning project built
+        around the Olist Brazilian E-Commerce dataset. It analyzes
+        engineered order, payment, product, seller, location and
+        timing features to estimate late-delivery risk.
+      </p>
+    </div>
+
+    <div class="grid grid--4">
+
+      <article class="card stat">
+        <i data-lucide="target"></i>
+        <span>Prediction Target</span>
+        <strong>Late Delivery</strong>
+      </article>
+
+      <article class="card stat">
+        <i data-lucide="trees"></i>
+        <span>Machine Learning Model</span>
+        <strong>Random Forest</strong>
+      </article>
+
+      <article class="card stat">
+        <i data-lucide="database"></i>
+        <span>Dataset</span>
+        <strong>Olist E-Commerce</strong>
+      </article>
+
+      <article class="card stat">
+        <i data-lucide="split"></i>
+        <span>Problem Type</span>
+        <strong>Binary Classification</strong>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- RISK ANALYSIS -->
+
+<section class="section section--tint" id="risk-analysis">
+  <div class="container">
+
+    <div class="section__head">
+      <h2>Delivery Risk Analysis</h2>
+
+      <p>
+        Submit order-level features to the trained machine learning
+        pipeline and receive a predicted late-delivery probability.
+        The prediction is generated through the DeliveryIQ FastAPI backend.
+      </p>
+    </div>
+
+    <div class="notice" role="note">
+      <i data-lucide="info"></i>
+
+      <p>
+        <strong>Model input:</strong>
+        The current interface accepts 24 engineered features used
+        by the trained model. These include order characteristics,
+        payment information, product dimensions, seller-location
+        statistics and delivery timing.
+
+        <strong>Prototype note:</strong>
+        This form is designed for model testing and demonstration.
+        A production workflow would collect basic order information
+        and calculate the required engineered features automatically.
+      </p>
+    </div>
+
+    <div class="analysis">
+
+      <form id="risk-form" class="card form" novalidate>
+
+        <div
+          id="form-error"
+          class="alert"
+          role="alert"
+          hidden
+        ></div>
+
+
+        <!-- ORDER AND PAYMENT -->
+
+        <fieldset class="group">
+          <legend>
+            <i data-lucide="shopping-cart"></i>
+            Order &amp; Payment
+          </legend>
+
+          <div class="fields">
+
+            <div class="field">
+              <label for="customer_state">Customer state</label>
+
+              <select
+                id="customer_state"
+                name="customer_state"
+                required
+              >
+                <option value="">Select state</option>
+              </select>
+
+              <small>Brazilian state code.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="total_items">Total items</label>
+
+              <input
+                id="total_items"
+                name="total_items"
+                type="number"
+                min="1"
+                max="100"
+                step="1"
+                required
+              >
+
+              <small>Number of items in the order.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="total_price">Total price (R$)</label>
+
+              <input
+                id="total_price"
+                name="total_price"
+                type="number"
+                min="0"
+                max="100000"
+                step="0.01"
+                required
+              >
+
+              <small>Total value of the ordered products.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="total_freight">Total freight (R$)</label>
+
+              <input
+                id="total_freight"
+                name="total_freight"
+                type="number"
+                min="0"
+                max="10000"
+                step="0.01"
+                required
+              >
+
+              <small>Total shipping cost.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="payment_count">Payment count</label>
+
+              <input
+                id="payment_count"
+                name="payment_count"
+                type="number"
+                min="1"
+                max="30"
+                step="1"
+                required
+              >
+
+              <small>Number of payment records.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="avg_installments">Average installments</label>
+
+              <input
+                id="avg_installments"
+                name="avg_installments"
+                type="number"
+                min="0"
+                max="30"
+                step="0.1"
+                required
+              >
+
+              <small>Average installment count.</small>
+              <span class="err"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+
+        <!-- PRODUCT AND SELLER -->
+
+        <fieldset class="group">
+          <legend>
+            <i data-lucide="package"></i>
+            Product &amp; Seller Features
+          </legend>
+
+          <div class="fields">
+
+            <div class="field">
+              <label for="total_product_weight">
+                Total product weight (g)
+              </label>
+
+              <input
+                id="total_product_weight"
+                name="total_product_weight"
+                type="number"
+                min="0"
+                max="1000000"
+                step="0.1"
+                required
+              >
+
+              <small>Combined weight of all products.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="avg_product_weight">
+                Average product weight (g)
+              </label>
+
+              <input
+                id="avg_product_weight"
+                name="avg_product_weight"
+                type="number"
+                min="0"
+                max="1000000"
+                step="0.1"
+                required
+              >
+
+              <small>Average product weight per item.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="avg_product_length">
+                Average product length (cm)
+              </label>
+
+              <input
+                id="avg_product_length"
+                name="avg_product_length"
+                type="number"
+                min="0"
+                max="500"
+                step="0.1"
+                required
+              >
+
+              <small>Average product length.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="avg_product_height">
+                Average product height (cm)
+              </label>
+
+              <input
+                id="avg_product_height"
+                name="avg_product_height"
+                type="number"
+                min="0"
+                max="500"
+                step="0.1"
+                required
+              >
+
+              <small>Average product height.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="seller_state_count">Seller state count</label>
+
+              <input
+                id="seller_state_count"
+                name="seller_state_count"
+                type="number"
+                min="1"
+                max="30"
+                step="1"
+                required
+              >
+
+              <small>Distinct seller states in the order.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="seller_city_count">Seller city count</label>
+
+              <input
+                id="seller_city_count"
+                name="seller_city_count"
+                type="number"
+                min="1"
+                max="100"
+                step="1"
+                required
+              >
+
+              <small>Distinct seller cities in the order.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="unique_product_categories">
+                Unique product categories
+              </label>
+
+              <input
+                id="unique_product_categories"
+                name="unique_product_categories"
+                type="number"
+                min="1"
+                max="100"
+                step="1"
+                required
+              >
+
+              <small>Number of distinct product categories.</small>
+              <span class="err"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+
+        <!-- LOCATION -->
+
+        <fieldset class="group">
+          <legend>
+            <i data-lucide="map-pin"></i>
+            Location &amp; Distance
+          </legend>
+
+          <div class="fields">
+
+            <div class="field">
+              <label for="customer_lat">Customer latitude</label>
+
+              <input
+                id="customer_lat"
+                name="customer_lat"
+                type="number"
+                min="-35"
+                max="7"
+                step="0.000001"
+                required
+              >
+
+              <small>Customer geographic coordinate.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="customer_lng">Customer longitude</label>
+
+              <input
+                id="customer_lng"
+                name="customer_lng"
+                type="number"
+                min="-75"
+                max="-32"
+                step="0.000001"
+                required
+              >
+
+              <small>Customer geographic coordinate.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="avg_seller_lat">Average seller latitude</label>
+
+              <input
+                id="avg_seller_lat"
+                name="avg_seller_lat"
+                type="number"
+                min="-35"
+                max="7"
+                step="0.000001"
+                required
+              >
+
+              <small>Mean latitude of the sellers.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="avg_seller_lng">Average seller longitude</label>
+
+              <input
+                id="avg_seller_lng"
+                name="avg_seller_lng"
+                type="number"
+                min="-75"
+                max="-32"
+                step="0.000001"
+                required
+              >
+
+              <small>Mean longitude of the sellers.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="customer_seller_distance_km">
+                Customer–seller distance (km)
+              </label>
+
+              <input
+                id="customer_seller_distance_km"
+                name="customer_seller_distance_km"
+                type="number"
+                min="0"
+                max="10000"
+                step="0.1"
+                required
+              >
+
+              <small>Engineered geographic distance feature.</small>
+              <span class="err"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+
+        <!-- TIMING -->
+
+        <fieldset class="group">
+          <legend>
+            <i data-lucide="calendar-clock"></i>
+            Timing &amp; Delivery Estimate
+          </legend>
+
+          <div class="fields">
+
+            <div class="field">
+              <label for="purchase_hour">Purchase hour</label>
+
+              <input
+                id="purchase_hour"
+                name="purchase_hour"
+                type="number"
+                min="0"
+                max="23"
+                step="1"
+                required
+              >
+
+              <small>Purchase hour in 24-hour format.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="purchase_month">Purchase month</label>
+
+              <select
+                id="purchase_month"
+                name="purchase_month"
+                required
+              >
+                <option value="">Select month</option>
+              </select>
+
+              <small>Month in which the order was placed.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="approval_hour">Approval hour</label>
+
+              <input
+                id="approval_hour"
+                name="approval_hour"
+                type="number"
+                min="0"
+                max="23"
+                step="1"
+                required
+              >
+
+              <small>Hour at which the order was approved.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="approval_time_hours">
+                Approval time (hours)
+              </label>
+
+              <input
+                id="approval_time_hours"
+                name="approval_time_hours"
+                type="number"
+                min="0"
+                max="1000"
+                step="0.1"
+                required
+              >
+
+              <small>Time between purchase and approval.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="estimated_delivery_days">
+                Estimated delivery days
+              </label>
+
+              <input
+                id="estimated_delivery_days"
+                name="estimated_delivery_days"
+                type="number"
+                min="0"
+                max="365"
+                step="0.1"
+                required
+              >
+
+              <small>Estimated delivery duration in days.</small>
+              <span class="err"></span>
+            </div>
+
+            <div class="field">
+              <label for="estimated_delivery_dayofweek">
+                Estimated delivery weekday
+              </label>
+
+              <select
+                id="estimated_delivery_dayofweek"
+                name="estimated_delivery_dayofweek"
+                required
+              >
+                <option value="">Select weekday</option>
+                <option value="0">Monday (0)</option>
+                <option value="1">Tuesday (1)</option>
+                <option value="2">Wednesday (2)</option>
+                <option value="3">Thursday (3)</option>
+                <option value="4">Friday (4)</option>
+                <option value="5">Saturday (5)</option>
+                <option value="6">Sunday (6)</option>
+              </select>
+
+              <small>Weekday encoding used during model training.</small>
+              <span class="err"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+
+        <!-- FORM ACTIONS -->
+
+        <div class="form__actions">
+
+          <button
+            type="submit"
+            class="btn btn--primary btn--lg"
+            id="submit-btn"
+          >
+            <span class="spinner" aria-hidden="true"></span>
+            <span class="btn__label">Analyze Order</span>
+          </button>
+
+          <button
+            type="reset"
+            class="btn btn--ghost btn--lg"
+            id="reset-btn"
+          >
+            Reset
+          </button>
+
+          <button
+            type="button"
+            class="btn btn--link"
+            id="fill-sample"
+          >
+            Fill sample values
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <!-- PREDICTION RESULT -->
+
+      <aside class="card result" id="result" aria-live="polite">
+
+        <div class="result__empty" id="result-empty">
+          <i data-lucide="activity"></i>
+
+          <h3>Ready for analysis</h3>
+
+          <p>
+            Enter the order features and select
+            <strong>Analyze Order</strong> to generate a
+            late-delivery risk estimate using the trained model.
+          </p>
+        </div>
+
+
+        <div class="result__content" id="result-content" hidden>
+
+          <div class="result__top">
+            <span class="pill" id="risk-pill">Low</span>
+          </div>
+
+          <h3 id="risk-title">Late-delivery risk assessment</h3>
+
+          <div
+            class="meter"
+            role="meter"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            id="meter"
+            aria-label="Late-delivery probability"
+          >
+
+            <div class="meter__head">
+              <span>Late-delivery probability</span>
+              <strong id="prob-value">0%</strong>
+            </div>
+
+            <div class="meter__track">
+              <i id="meter-fill"></i>
+              <b class="tick" style="left:33%"></b>
+              <b class="tick" style="left:66%"></b>
+            </div>
+
+            <div class="meter__scale">
+              <span>Low</span>
+              <span>Medium</span>
+              <span>High</span>
+            </div>
+
+          </div>
+
+          <p id="risk-explain" class="explain"></p>
+
+          <h4>Submitted order features</h4>
+
+          <dl class="factors" id="factors"></dl>
+
+          <p class="fine" id="result-source"></p>
+
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- MODEL INSIGHTS -->
+
+<section class="section" id="model-insights">
+  <div class="container">
+
+    <div class="section__head">
+      <h2>Model Performance</h2>
+
+      <p>
+        Performance metrics from the current validation split.
+        The evaluation focuses on identifying late orders rather
+        than relying on accuracy alone.
+      </p>
+    </div>
+
+    <div class="grid grid--4">
+
+      <article class="card metric">
+        <span>F1 Score</span>
+        <strong>0.33</strong>
+      </article>
+
+      <article class="card metric">
+        <span>Precision</span>
+        <strong>0.31</strong>
+      </article>
+
+      <article class="card metric">
+        <span>Recall</span>
+        <strong>0.36</strong>
+      </article>
+
+      <article class="card metric">
+        <span>Accuracy</span>
+        <strong>0.90</strong>
+      </article>
+
+    </div>
+
+
+    <div class="insights">
+
+      <div class="card">
+        <h3>Confusion Matrix</h3>
+
+        <div class="matrix" role="table" aria-label="Validation confusion matrix">
+
+          <div class="matrix__corner" role="presentation"></div>
+
+          <div class="matrix__h" role="columnheader">
+            Predicted on-time
+          </div>
+
+          <div class="matrix__h" role="columnheader">
+            Predicted late
+          </div>
+
+          <div class="matrix__h matrix__h--row" role="rowheader">
+            Actual on-time
+          </div>
+
+          <div class="cell cell--ok" role="cell">
+            <strong>13,549</strong>
+            <small>True negatives</small>
+          </div>
+
+          <div class="cell cell--bad" role="cell">
+            <strong>839</strong>
+            <small>False positives</small>
+          </div>
+
+          <div class="matrix__h matrix__h--row" role="rowheader">
+            Actual late
+          </div>
+
+          <div class="cell cell--bad" role="cell">
+            <strong>670</strong>
+            <small>False negatives</small>
+          </div>
+
+          <div class="cell cell--ok" role="cell">
+            <strong>375</strong>
+            <small>True positives</small>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="card">
+        <h3>Interpreting the Results</h3>
+
+        <p>
+          The validation dataset contains substantially more
+          on-time orders than late orders. This class imbalance
+          makes accuracy alone an unreliable measure of model quality.
+        </p>
+
+        <p>
+          The model identifies approximately 36% of late orders
+          in the current validation split. Its precision of around
+          31% means that some predicted late orders will actually
+          arrive on time.
+        </p>
+
+        <p>
+          These results indicate that the model can act as an
+          exploratory risk-screening tool, but it should not be
+          treated as a definitive operational decision-maker.
+        </p>
+
+        <p class="fine">
+          Metrics are from the development validation split.
+          They are not a guarantee of performance on unseen
+          production data.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section section--tint" id="how-it-works">
+  <div class="container">
+
+    <div class="section__head">
+      <h2>How DeliveryIQ Works</h2>
+
+      <p>
+        An end-to-end workflow connecting data preparation,
+        machine learning and API-based prediction.
+      </p>
+    </div>
+
+    <ol class="steps">
+
+      <li>
+        <span class="steps__icon">
+          <i data-lucide="database"></i>
+        </span>
+
+        <h3>Data Preparation</h3>
+
+        <p>
+          Multiple Olist datasets containing orders, products,
+          payments, customers and sellers are combined for analysis.
+        </p>
+      </li>
+
+      <li>
+        <span class="steps__icon">
+          <i data-lucide="wrench"></i>
+        </span>
+
+        <h3>Cleaning &amp; Feature Engineering</h3>
+
+        <p>
+          Data quality issues are handled and meaningful features
+          such as approval duration and customer–seller distance
+          are created.
+        </p>
+      </li>
+
+      <li>
+        <span class="steps__icon">
+          <i data-lucide="cpu"></i>
+        </span>
+
+        <h3>Model Training &amp; Evaluation</h3>
+
+        <p>
+          A Random Forest classification pipeline is trained,
+          evaluated and exported for inference.
+        </p>
+      </li>
+
+      <li>
+        <span class="steps__icon">
+          <i data-lucide="gauge"></i>
+        </span>
+
+        <h3>API-Based Prediction</h3>
+
+        <p>
+          The FastAPI backend loads the saved model pipeline,
+          processes submitted features and returns a prediction
+          with its estimated late-delivery probability.
+        </p>
+      </li>
+
+      <li>
+        <span class="steps__icon">
+          <i data-lucide="briefcase"></i>
+        </span>
+
+        <h3>Business Interpretation</h3>
+
+        <p>
+          The predicted probability is presented as a risk signal
+          that can help explore prioritization and operational
+          follow-up strategies.
+        </p>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="section" id="about">
+  <div class="container about">
+
+    <div>
+      <h2>About the Project</h2>
+
+      <p>
+        DeliveryIQ is a personal machine learning portfolio
+        project exploring how predictive analytics can help
+        understand delivery delays in e-commerce logistics.
+      </p>
+
+      <p>
+        The project covers data preprocessing, feature engineering,
+        model development, evaluation, serialization and deployment
+        through a Python API.
+      </p>
+
+      <ul class="chips">
+        <li>Machine Learning</li>
+        <li>Predictive Analytics</li>
+        <li>Logistics &amp; Supply Chain</li>
+        <li>Feature Engineering</li>
+        <li>Model Evaluation</li>
+        <li>FastAPI</li>
+        <li>Practical ML Deployment</li>
+      </ul>
+    </div>
+
+
+    <div class="card dev">
+      <h3>Developer</h3>
+
+      <p>
+        Explore the source code and project development.
+      </p>
+
+      <a
+        class="link-row"
+        href="https://github.com/AniruddhaPal-01"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i data-lucide="github"></i>
+        GitHub · Aniruddha Pal
+      </a>
+
+      <a
+        class="link-row"
+        href="https://www.linkedin.com/in/aniruddha-pal-b0a888359/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i data-lucide="linkedin"></i>
+        LinkedIn · Connect
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  <div class="container footer__grid">
+
+    <div>
+      <strong>
+        DeliveryIQ · Olist Late Delivery Risk Prediction
+      </strong>
+
+      <p>
+        Dataset: Brazilian E-Commerce Public Dataset by Olist.
+        Olist is not affiliated with this project.
+      </p>
+    </div>
+
+    <div>
+      <p>
+        An educational machine learning project.
+        Predictions are probabilistic estimates and should not
+        be used as the sole basis for business decisions.
+      </p>
+
+      <p>
+        <a
+          href="https://github.com/AniruddhaPal-01"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View project developer's GitHub
+        </a>
+      </p>
+    </div>
+
+  </div>
+
+  <div class="container footer__legal">
+    © 2026 DeliveryIQ · Machine Learning Portfolio Project
+  </div>
+</footer>
+
+</body>
+</html>
